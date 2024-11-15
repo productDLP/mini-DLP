@@ -1,0 +1,105 @@
+1. Architecture Overview
+
+Frontend: Built using React for creating user interfaces tailored to different user roles (Admin, User, Super Admin). Tailwind CSS is utilized for efficient and consistent styling.
+Backend: Developed with Node.js and Express to manage API endpoints and server-side functionality.
+Database: Utilizes MongoDB to store all necessary data, including users, documents, DLP rules, and activity logs.
+
+Cloud Services (Azure):
+
+Azure Blob Storage: Used for storing documents securely.
+Azure Cognitive Services: Provides optional functionality for analyzing document content, such as scanning for sensitive data.
+Azure Active Directory (AAD): Facilitates secure user authentication and implements role-based access control.
+Azure Functions: Supports background processing, such as evaluating sensitive content in documents.
+Middleware: Implements authentication and authorization mechanisms to enforce user role-based permissions.
+
+
+2. Core Components
+
+User Interfaces:
+
+Admin Panel: Enables administrators to define rules for content management, monitor flagged documents, and configure user permissions.
+
+User Dashboard: Allows users to manage documents, including creating, editing, viewing, sharing, and verifying compliance with DLP rules.
+
+Super Admin Interface: Provides capabilities to define sensitive content patterns and manage overall system settings.
+
+Document Management:
+>>Includes create, read, update, and delete (CRUD) operations for documents.
+>>Supports functionality to flag documents that violate predefined rules.
+
+DLP Rule Management:Enables admins to define and maintain rules to identify sensitive content (e.g., regex for patterns like credit card numbers).
+
+Metrics and Analytics:Delivers real-time insights into metrics such as the number of documents flagged or shares blocked due to rule violations.
+
+
+3. High-Level API Design
+
+Auth & User Management:
+>> /api/auth/signup: Endpoint for user registration.
+>> /api/auth/login: Endpoint for user login functionality.
+>> /api/auth/roles: Manages role assignment and validation.
+
+Document Management:
+>> /api/documents: Handles CRUD operations for documents.
+>> /api/documents/share: Facilitates document sharing with other users.
+
+Rule Management:
+>> /api/rules: Provides CRUD operations for managing DLP rules.
+>> /api/rules/check: Verifies document compliance with defined rules.
+
+Analytics:
+>>/api/metrics: Fetches real-time analytics data for Super Admins, such as metrics on flagged documents.
+
+
+4. Data Models
+
+User:
+userId: String (primary key)
+username, email, password: String
+role: Enum (Admin, User, Super Admin)
+
+Document:
+docId: String (primary key)
+content: Text or Blob
+owner: Reference to a User
+sharedWith: Array of User references
+status: Enum (Compliant, Non-compliant)
+
+Rule:
+ruleId: String (primary key)
+description: String
+pattern: Regex for detecting sensitive content
+action: Enum (Block, Flag)
+
+
+5. Workflow & Use Cases
+
+Document Creation & Validation:
+When a user adds or modifies a document, the backend automatically checks the content against admin-defined DLP rules.
+Documents with sensitive information are flagged, and sharing may be restricted depending on the rule's action.
+Admin Rule Definition:
+Admins can define rules specifying patterns (e.g., credit card detection via regex).
+These rules are stored and enforced during document creation and sharing processes.
+Real-time Monitoring & Reporting:
+Super Admins have access to system metrics, such as flagged document counts and blocked sharing attempts.
+
+
+6. Implementation on Azure
+
+Azure Blob Storage: Manages secure document storage with compliance-based access control.
+Azure Functions: Performs asynchronous tasks like scanning documents for sensitive content.
+Azure Cognitive Services: (Optional) Enhances capabilities with advanced text analysis, including entity recognition.
+Azure Active Directory (AAD): Handles user authentication and role-based access enforcement.
+
+
+7. Security and Compliance
+
+Encryption: Implements encryption for protecting sensitive data at rest (in Azure Blob Storage) and during transmission (via API calls).
+Role-Based Access Control: Ensures that only Admins and Super Admins can configure rules or modify user roles.
+Data Compliance: Performs regular audits to ensure adherence to predefined rules and document compliance.
+
+
+8. Deployment and DevOps
+
+CI/CD Pipeline: Configured with GitHub Actions to automate code builds and deployments to Azure.
+Monitoring and Alerts: Uses Azure Monitor for real-time alerts, such as rule violations or system issues.
