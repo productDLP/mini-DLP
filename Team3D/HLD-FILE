@@ -1,0 +1,88 @@
+High-Level Design (HLD) Document
+
+1.Overview
+  The Mini Data Loss Prevention (DLP) solution is designed to identify and prevent sensitive document sharing within an enterprise. The system enables rule definition, document classification, document sharing, and notification handling to ensure secure and compliant document usage.
+
+2.System Architecture
+
+  Actors:
+    Super Admin: Configures system-level settings and sensitive data types.
+    Admin: Manages users and defines sharing rules.
+    User: Creates, edits, deletes, and shares documents within the system.
+
+  Modules:
+    End-to-End Stack:
+      Admin Interface: Allows admins to create/manage users and define rules.
+      User Interface: Provides users with tools for document management and sharing.
+      Document Sharing: Enables document sharing while enforcing compliance with rules.
+      Notification/Alert: Notifies users about rule violations.
+
+    Document Storage:
+      User DB: Stores user profiles and admin-defined rules.
+      Document Repository: Stores user-created documents.
+
+    Processing Engines:
+      Rule Engine: Validates documents against predefined rules.
+      Classification Engine: Classifies documents based on content sensitivity.
+
+3.Data Flow
+  i.Admin Workflow:
+  Admin defines rules in the Rule Engine via the Admin Interface.
+  Rules are stored in the User DB for validation.
+
+  ii.User Workflow:
+  Users create/edit documents using the User Interface.
+  The Rule Engine validates the documents against predefined rules.
+  Documents are classified using the Classification Engine.
+  If violations are detected, users are notified via the Notification module.
+
+  iii.Document Sharing:  
+  Users share documents using the Document Sharing module.
+  Shared documents are checked by the Rule Engine for compliance.
+  Sensitive or non-compliant documents trigger alerts.
+
+4.Component Design:
+
+  i.End-to-End Stack:
+    Admin Interface: RESTful web interface for rule and user management.
+    User Interface: A user-friendly web interface supporting CRUD operations on documents.
+    Document Sharing: Implements secure sharing workflows with compliance checks.
+    Notification/Alert: Generates alerts for violations and displays them to users.
+
+  ii.Document Storage:
+    User DB: Stores user details, rule configurations, and document metadata.
+    Document Repository: Stores actual documents with versioning support.
+
+  iii.Processing Engines:
+    Rule Engine: Applies rules defined by admins to validate document content.
+    Classification Engine: Uses text analysis and pattern matching to detect sensitive information.
+
+5.Key Data Flows
+  Rule Definition: Admins define sensitive content rules (e.g., regex for credit card numbers) in the Rule Engine.
+  Document Validation: Documents are validated against rules to check for sensitive content.
+  Classification: Documents are classified as sensitive/non-sensitive based on predefined parameters.
+  Notification: Users receive real-time alerts for rule violations during document sharing.
+
+6.Metrics
+  Number of users in the system.
+  Number of documents per sensitivity type.
+  Number of blocked sharing attempts.
+  Storage usage statistics for documents.
+
+7.Diagrams
+  System Architecture Diagram: See the HLD diagram.
+  Data Flow Diagram: See the DFD diagram.
+
+8.Technology Stack
+  Frontend: React.js or Angular.js for user interfaces.
+  Backend: Node.js or Spring Boot for processing logic.
+  Database: MongoDB for User DB and Document Repository.
+  Processing Engines: Custom algorithms or existing libraries for rule-based validation and classification.
+
+9.Non-Functional Requirements
+  Performance: Validate and classify documents within 2 seconds.
+  Scalability: Handle up to 10,000 simultaneous users.
+  Security: Ensure data encryption for storage and transmission.
+  Reliability: Ensure 99.9% system uptime.
+10.Conclusion:
+  This Mini DLP system ensures secure document handling and compliance with enterprise-defined rules, reducing the risk of sensitive data leaks while maintaining a seamless user experience.
