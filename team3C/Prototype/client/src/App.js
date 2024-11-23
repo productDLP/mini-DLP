@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import FileUploadComponent from './components/FileUploadComponent';
 
 function App() {
   return (
-    <div>App</div>
-  )
+    <div>
+      <FileUploadComponent />
+    </div>
+  );
 }
 
-export default App
+export default App;
