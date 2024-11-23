@@ -1,0 +1,9 @@
+{
+  "sensitiveWords": [
+    "confidential",
+    "password",
+    "credit card",
+    "classified",
+    "proprietary"
+  ]
+}
