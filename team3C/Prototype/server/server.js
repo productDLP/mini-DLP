@@ -1,10 +1,4 @@
-<<<<<<< HEAD
 const express = require("express");
-=======
-const express = require('express');
-const multer = require('multer');
-const app = express();
->>>>>>> 3ce3ba0148ed91a9048db41c01862ef31c065324
 const cors = require("cors");
 const multer = require("multer");
 const fs = require("fs");
@@ -19,25 +13,8 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-<<<<<<< HEAD
 // JSON parser middleware
 app.use(express.json());
-=======
-const upload = multer({ dest: 'uploads/' }); // Files will be stored in the 'uploads' folder
-
-app.use(cors(corsOptions))
-app.use(express.json());
-
-// File upload route
-app.post('/upload', upload.single('file'), (req, res) => {
-    if (!req.file) {
-      return res.status(400).json({ message: 'No file uploaded' });
-    }
-  
-    // You can process the file here (e.g., move it to a permanent location or parse it)
-    res.status(200).json({ message: 'File uploaded successfully!', fileName: req.file.originalname });
-  });
->>>>>>> 3ce3ba0148ed91a9048db41c01862ef31c065324
 
 // Load sensitive words
 const sensitiveWords = JSON.parse(
@@ -53,7 +30,7 @@ const upload = multer({
     destination: (req, file, cb) => {
       const uploadDir = "uploads/";
       if (!fs.existsSync(uploadDir)) {
-        fs.mkdirSync(uploadDir); 
+        fs.mkdirSync(uploadDir); // Ensure the uploads directory exists
         console.log("Uploads directory created:", uploadDir);
       }
       cb(null, uploadDir);
@@ -64,7 +41,7 @@ const upload = multer({
       cb(null, uniqueName);
     },
   }),
-  limits: { fileSize: 5 * 1024 * 1024 }, 
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB limit
 });
 
 // File upload endpoint
