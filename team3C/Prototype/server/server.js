@@ -46,7 +46,7 @@ const upload = multer({
 
 // File upload endpoint
 app.post("/upload", upload.single("file"), async (req, res) => {
-  console.log("Request received at /upload endpoint");
+  //console.log("Request received at /upload endpoint");
 
   try {
     // Check if file is provided
@@ -60,17 +60,17 @@ app.post("/upload", upload.single("file"), async (req, res) => {
 
     // Resolve file path
     const filePath = path.resolve(req.file.path);
-    console.log("File Path:", filePath);
+    //console.log("File Path:", filePath);
 
     // Read and parse the PDF content
     const pdfBuffer = fs.readFileSync(filePath);
-    console.log("Reading PDF buffer...");
+    //console.log("Reading PDF buffer...");
     const pdfData = await pdfParse(pdfBuffer);
     const documentContent = pdfData.text;
-    console.log("Extracted Document Content:", documentContent);
+    //console.log("Extracted Document Content:", documentContent);
 
     // Match sensitive words
-    console.log("Matching sensitive words...");
+    //console.log("Matching sensitive words...");
     const matchedWords = sensitiveWords.filter((word) =>
       documentContent.toLowerCase().includes(word.toLowerCase())
     );
@@ -82,7 +82,10 @@ app.post("/upload", upload.single("file"), async (req, res) => {
     console.log("File deleted after processing:", filePath);
 
     // Send response
-    res.json({ matchedWords });
+    res.json({
+      message: "File processed successfully",
+      matchedWords,
+    });
   } catch (error) {
     console.error("Error processing file:", error);
     res.status(500).json({ error: "Internal Server Error" });
