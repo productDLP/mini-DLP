@@ -1,1 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DLP Prototype</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>DLP Prototype</h1>
+    <form id="dlpForm">
+      <label for="data">Enter Text:</label>
+      <input type="text" id="data" name="data" placeholder="Type sensitive data...">
+      
+      <label for="fileInput">Or Select a File:</label>
+      <input type="file" id="fileInput" name="fileInput" accept=".txt, .json, .csv">
+      
+      <button type="submit">Check Data</button>
+    </form>
+    <div class="response" id="responseBox"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
 
