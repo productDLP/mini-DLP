@@ -1,0 +1,114 @@
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+  color: #333;
+}
+
+h1, h2 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+h1 {
+  color: #4caf50;
+}
+
+h2 {
+  color: #555;
+}
+
+/* Container for content */
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styles */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+input[type="file"] {
+  padding: 8px;
+  margin: 10px 0;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* List styles */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background: #f9f9f9;
+  margin: 10px 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+li strong {
+  color: #4caf50;
+}
+
+/* Rule validation section */
+.rule-validation {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.rule-validation p {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.rule-validation p span {
+  font-weight: bold;
+  color: #4caf50;
+}
+
+.rule-validation p span.violated {
+  color: #f44336;
+}
+
+/* Button container */
+button + button {
+  margin-left: 10px;
+}
+
+button-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #777;
+}
