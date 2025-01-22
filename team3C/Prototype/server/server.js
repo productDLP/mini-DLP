@@ -3,6 +3,8 @@ const cors = require("cors");
 const multer = require("multer");
 const fs = require("fs");
 const pdfParse = require("pdf-parse");
+const mammoth = require("mammoth");
+const xlsx = require("xlsx");
 const path = require("path");
 
 const app = express();
@@ -16,13 +18,12 @@ app.use(cors(corsOptions));
 // JSON parser middleware
 app.use(express.json());
 
-// Load sensitive words
-const sensitiveWords = JSON.parse(
+// Load sensitive patterns
+const sensitivePatterns = JSON.parse(
   fs.readFileSync("sensitive-words.json", "utf8")
-).sensitiveWords;
+).sensitivePatterns;
 
-// Log sensitive words
-console.log("Sensitive Words Loaded:", sensitiveWords);
+console.log("Sensitive Patterns Loaded:", sensitivePatterns);
 
 // Multer configuration for file uploads
 const upload = multer({
@@ -44,47 +45,59 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB limit
 });
 
+// Helper to extract text from XLSX files
+const extractTextFromXlsx = (filePath) => {
+  const workbook = xlsx.readFile(filePath);
+  let extractedText = "";
+
+  workbook.SheetNames.forEach((sheetName) => {
+    const sheet = workbook.Sheets[sheetName];
+    const sheetData = xlsx.utils.sheet_to_csv(sheet);
+    extractedText += sheetData + "\n";
+  });
+
+  return extractedText;
+};
+
 // File upload endpoint
 app.post("/upload", upload.single("file"), async (req, res) => {
-  //console.log("Request received at /upload endpoint");
-
   try {
-    // Check if file is provided
     if (!req.file) {
-      console.error("No file uploaded");
       return res.status(400).json({ error: "No file uploaded" });
     }
 
-    // Log file details
-    console.log("Uploaded File Details:", req.file);
-
-    // Resolve file path
     const filePath = path.resolve(req.file.path);
-    //console.log("File Path:", filePath);
+    const fileExtension = path.extname(req.file.originalname).toLowerCase();
+    let documentContent = "";
 
-    // Read and parse the PDF content
-    const pdfBuffer = fs.readFileSync(filePath);
-    //console.log("Reading PDF buffer...");
-    const pdfData = await pdfParse(pdfBuffer);
-    const documentContent = pdfData.text;
-    //console.log("Extracted Document Content:", documentContent);
+    // Process file based on type
+    if (fileExtension === ".pdf") {
+      const pdfBuffer = fs.readFileSync(filePath);
+      const pdfData = await pdfParse(pdfBuffer);
+      documentContent = pdfData.text;
+    } else if (fileExtension === ".docx") {
+      const mammothResult = await mammoth.extractRawText({ path: filePath });
+      documentContent = mammothResult.value;
+    } else if (fileExtension === ".xlsx") {
+      documentContent = extractTextFromXlsx(filePath);
+    } else {
+      fs.unlinkSync(filePath);
+      return res.status(400).json({ error: "Unsupported file type" });
+    }
 
-    // Match sensitive words
-    //console.log("Matching sensitive words...");
-    const matchedWords = sensitiveWords.filter((word) =>
-      documentContent.toLowerCase().includes(word.toLowerCase())
-    );
+    const matchedPatterns = sensitivePatterns
+      .map((pattern) => {
+        const regex = new RegExp(pattern.pattern, "g");
+        const matches = documentContent.match(regex);
+        return matches ? { name: pattern.name, matches } : null;
+      })
+      .filter(Boolean);
 
-    console.log("Matched Words:", matchedWords);
-
-    // Delete the file after processing
     fs.unlinkSync(filePath);
-    console.log("File deleted after processing:", filePath);
 
-    // Send response
     res.json({
       message: "File processed successfully",
-      matchedWords,
+      matchedPatterns,
     });
   } catch (error) {
     console.error("Error processing file:", error);
@@ -92,7 +105,6 @@ app.post("/upload", upload.single("file"), async (req, res) => {
   }
 });
 
-// Start the server
 const PORT = 8888;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

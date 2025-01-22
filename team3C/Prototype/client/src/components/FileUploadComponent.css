@@ -1,38 +1,116 @@
+/* General Container Styles */
 .file-upload-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 2rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    width: 300px;
-    margin: auto;
-    margin-top: 2rem;
-  }
-  
-  .file-upload-input {
-    width: 100%;
-    padding: 0.5rem;
-  }
-  
-  .file-upload-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 0.7rem 1.5rem;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .file-upload-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .file-upload-status {
-    margin-top: 1rem;
-    font-size: 0.9rem;
-    color: #555;
-  }
-  
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Styling */
+.upload-title {
+  font-size: 2rem;
+  text-align: center;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* File Input and Button Styles */
+.file-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.file-upload-input {
+  font-size: 1rem;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  width: 80%;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.file-upload-input:focus {
+  border-color: #4a90e2;
+}
+
+.file-upload-button {
+  padding: 12px 24px;
+  background-color: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.file-upload-button:hover {
+  background-color: #357ab7;
+}
+
+/* Status Message Styles */
+.upload-status {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Sensitive Data Section */
+.sensitive-data-container {
+  margin-top: 30px;
+  padding: 20px;
+  border-top: 2px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+.sensitive-data-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.sensitive-data-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sensitive-data-item {
+  background-color: #e6f7ff;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sensitive-data-item strong {
+  color: #1a73e8;
+}
+
+/* New Styles for File Details */
+.file-details {
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.file-details p {
+  font-size: 1rem;
+  color: #333;
+  margin: 5px 0;
+}
+
+.file-details strong {
+  font-weight: bold;
+  color: #1a73e8;
+}
