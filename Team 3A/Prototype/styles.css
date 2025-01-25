@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -6,10 +7,10 @@
 
 body {
   font-family: 'Helvetica Neue', Arial, sans-serif;
-  background-color: #f4f6f9; /* Light gray for a neutral background */
+  background-color: #f4f6f9; 
   display: flex;
   min-height: 100vh;
-  color: #2c3e50; /* Dark Slate Blue for text */
+  color: #2c3e50; 
   line-height: 1.6;
 }
 
@@ -57,7 +58,7 @@ body {
 }
 
 .sidebar ul li a {
-  color: #dfe6e9; /* Light gray for the links */
+  color: #dfe6e9; 
   text-decoration: none;
   font-size: 1.1rem;
   padding: 12px 25px;
@@ -69,9 +70,9 @@ body {
 }
 
 .sidebar ul li a:hover {
-  background-color: #b8c7e4; /* Light Green for hover effect */
+  background-color: #b8c7e4; 
   padding-left: 30px;
-  color: #1a2a3a; /* Deep Navy Blue for sidebar background */
+  color: #1a2a3a; 
   padding-left: 20px;
 }
 
@@ -92,7 +93,7 @@ body {
   background: #ffffff;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  margin-left: 270px; /* To make space for the sidebar */
+  margin-left: 270px;
   margin-top: 20px;
   transition: all 0.3s ease;
 }
@@ -101,13 +102,13 @@ body {
 header h1 {
   font-size: 2.4rem;
   margin-bottom: 10px;
-  color: #2c3e50; /* Dark Blue */
+  color: #2c3e50;
   font-weight: 700;
 }
 
 header p {
   font-size: 1.2rem;
-  color: #7f8c8d; /* Greyish for the sub-header text */
+  color: #7f8c8d;
   margin-bottom: 30px;
 }
 
@@ -137,19 +138,19 @@ p {
 form {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Reduced the gap between elements */
+  gap: 15px; 
 }
 
 input[type="file"],
 textarea,
 select {
-  padding: 8px; /* Reduced the padding for smaller height */
+  padding: 8px; 
   border-radius: 8px;
   border: 1px solid #ccc;
   background-color: #f9f9f9;
-  font-size: 1rem; /* Slightly smaller font size */
+  font-size: 1rem; 
   color: #34495e;
-  height: auto; /* Ensure the height is automatically adjusted */
+  height: auto; 
 }
 
 input[type="file"]:focus,
@@ -159,17 +160,17 @@ select:focus {
   box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
 }
 
-/* Analyze Button */
+
 button {
-  background-color: #3498db; /* Light Blue */
+  background-color: #3498db; 
   color: white;
   border: none;
-  padding: 10px 20px; /* Reduced padding for smaller button */
+  padding: 10px 20px; 
   border-radius: 8px;
   cursor: pointer;
-  font-size: 1rem; /* Smaller font size */
+  font-size: 1rem; 
   transition: background-color 0.3s ease;
-  width: auto; /* Auto width to fit content */
+  width: auto; 
 }
 
 button:hover {
@@ -181,7 +182,6 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* List Styling (For Dashboards and Monitoring Stats) */
 ul {
   padding-left: 20px;
 }
@@ -192,7 +192,7 @@ ul li {
   color: #34495e;
 }
 
-/* Cards for Results (Optional: Depending on your content) */
+
 .card {
   background-color: #ecf0f1;
   border-radius: 10px;
@@ -252,7 +252,7 @@ ul li {
   background-color: #3498db;
 }
 
-/* Loading States */
+
 .loading {
   font-size: 1.2rem;
   color: #3498db;
