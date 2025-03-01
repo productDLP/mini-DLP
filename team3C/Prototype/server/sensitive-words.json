@@ -2,7 +2,18 @@
   "sensitivePatterns": [
     {
       "name": "PAN",
-      "pattern": "\\b[A-Z]{5}[0-9]{4}[A-Z]\\b"
+      "pattern": "\\b[A-Z]{5}[0-9]{4}[A-Z]\\b",
+      "requiresValidation": true
+    },
+    {
+      "name": "Aadhaar",
+      "pattern": "\\b\\d{12}\\b",
+      "requiresValidation": true
+    },
+    {
+      "name": "IndianPassport",
+      "pattern": "\\b[A-Z]\\d{7}\\b",
+      "requiresValidation": true
     },
     {
       "name": "Email",
@@ -10,27 +21,28 @@
     },
     {
       "name": "PhoneNumber",
-      "pattern": "\\b\\d{10}\\b"
+      "pattern": "\\+\\d{8,15}\\b",
+      "requiresValidation": true
     },
     {
-      "name": "CreditCard",
-      "pattern": "\\b(?:\\d[ -]*?){13,16}\\b"
+      "name": "IPv4",
+      "pattern": "\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b",
+      "requiresValidation": true
     },
     {
-      "name": "IP Address",
-      "pattern": "\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b"
+      "name": "IPv6",
+      "pattern": "\\b(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}\\b",
+      "requiresValidation": true
     },
     {
-      "name": "SSN",
-      "pattern": "\\b\\d{3}-\\d{2}-\\d{4}\\b"
-    },
-    {
-      "name": "URL",
-      "pattern": "https?:\\/\\/[a-zA-Z0-9.-]+(?:\\.[a-zA-Z]{2,})+"
+      "name": "MACAddress",
+      "pattern": "\\b([0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}\\b|\\b[0-9A-Fa-f]{12}\\b",
+      "requiresValidation": true
     },
     {
       "name": "Date",
-      "pattern": "\\b(?:\\d{2}[-/]){2}\\d{4}\\b"
+      "pattern": "\\b\\d{4}-\\d{2}-\\d{2}\\b|\\b\\d{2}-\\d{2}-\\d{4}\\b|\\b\\d{2}\\/\\d{2}\\/\\d{4}\\b|\\b\\d{4}\\/\\d{2}\\/\\d{2}\\b",
+      "requiresValidation": true
     }
   ]
 }
